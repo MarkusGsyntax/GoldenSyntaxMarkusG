@@ -1,4 +1,3 @@
 class BagItem {
-    fun applyEffect(hero: Hero) {
-    }
+    var bagItem = mutableListOf("")
 }

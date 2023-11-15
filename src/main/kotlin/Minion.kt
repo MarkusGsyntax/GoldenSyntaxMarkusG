@@ -1,44 +1,31 @@
-class Minion(name: String, hp: Int, magician: Magician, thief: Thief, warrior: Warrior) : Boss(name, hp, magician, thief, warrior) {
+class Minion(name: String, hp: Int) : Dragon(name, hp) {
 
-
-    fun isMinionAlive(): Boolean {
-        return hp > 0
+    fun fireAttack(heroes: MutableList<Hero>, damage: Int = 35) {
+        val randomTarget = heroes.random()
+        println("$name führt einen Feuerangriff auf ${randomTarget.name} aus.")
+        randomTarget.takeDamage(damage)
     }
 
-    fun fireAttack(target: Hero) {
-        val livingHeroes = listOf(magician, thief, warrior).filter { it.isHeroAlive() }
-        if (livingHeroes.isNotEmpty()) {
-            val randomTarget = livingHeroes.random()
-            println("$name führt einen Feuerangriff auf ${randomTarget.name} aus.")
-            randomTarget.takeDamage(25)
-            println("${randomTarget.name} hat nun noch ${randomTarget.hp} Lebenspunkte!")
-        }
+
+    fun poisonAttack(heroes: MutableList<Hero>, damage: Int = 15) {
+        val randomTarget = heroes.random()
+        println("$name setzt Gift ein und vergiftet $randomTarget.")
+        randomTarget.hp -= (randomTarget.hp/0.20).toInt()
     }
 
-    fun poisonAttack() {
-        val livingHeroes = listOf(magician, thief, warrior).filter { it.isHeroAlive() }
-        if (livingHeroes.isNotEmpty()) {
-            println("$name setzt Gift ein und vergiftet das Heldenteam.")
-            for (hero in livingHeroes) {
-                hero.takeDamage(9)
-            }
-        }
+
+    fun lifeSteal(heroes: MutableList<Hero>, damage: Int = 25) {
+        val randomTarget = heroes.random()
+        println("$name stiehlt $damage Lebenspunkte von ${randomTarget.name}.")
+        randomTarget.takeDamage(damage)
+        this.hp += 25
+        println("$name hat nun ${this.hp} Lebenspunkte!")
     }
 
-    fun lifeSteal() {
-        val livingHeroes = listOf(magician, thief, warrior).filter { it.isHeroAlive() }
-        if (livingHeroes.isNotEmpty()) {
-            val randomTarget = livingHeroes.random()
-            println("$name stiehlt 25 Lebenspunkte von ${randomTarget.name}.")
-            randomTarget.takeDamage(25)
-            this.hp += 25
-            println("$name hat nun ${this.hp} Lebenspunkte!")
-            println("${randomTarget.name} hat nun noch ${randomTarget.hp} Lebenspunkte!")
-        }
-    }
 
     fun heal() {
         println("$name heilt sich selbst um 25 Lebenspunkte!")
         this.hp += 25
+        println("$name hat nun ${this.hp} Lebenspunkte!")
     }
 }

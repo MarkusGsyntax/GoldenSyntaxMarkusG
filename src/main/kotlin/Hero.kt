@@ -1,4 +1,4 @@
-open class Hero(open var name: String, open var hp: Int) {
+open class Hero(val name: String, var hp: Int) {
     var isAlive = true
     private var isProtected = false
 
@@ -7,25 +7,19 @@ open class Hero(open var name: String, open var hp: Int) {
         isProtected = true
     }
 
-    open fun isHeroAlive(): Boolean {
-        return this.hp > 0
-    }
-
     fun takeDamage(damage: Int) {
         if (isProtected) {
             println("$name ist geschützt und erleidet keinen Schaden in dieser Runde.")
             isProtected = false
         } else {
             hp -= damage
-            if (hp <= 0) {
-                isAlive = false
+            Thread.sleep(1500)
+            println("${this.name} hat noch ${this.hp} Lebenspunkte!")
+            if (this.hp <= 0) {
+                this.isAlive = false
+                println("${this.name} ist gestorben!")
+                heroes.remove(this)
             }
-            println("$name erleidet $damage Schaden.")
         }
-    }
-
-    open fun useBagItem(item: BagItem) {
-        // Verwende einen Gegenstand aus dem Beutel
-        item.applyEffect(this)
     }
 }
