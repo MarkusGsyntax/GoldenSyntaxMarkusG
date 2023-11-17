@@ -13,13 +13,13 @@ class Minion(name: String, hp: Int) : Boss(name, hp) {
         val livingHeroes = heroes.filter { it.isAlive }
         if (livingHeroes.isNotEmpty()) {
             val randomHero = livingHeroes.random()
-            println("$name setzt Gift ein und vergiftet ${randomHero.name}.")
+            println("$name hat ${randomHero.name} vergiftet.")
             isPoisoned = true
             if (randomHero.hp > randomHero.maxHP * 0.2 && isPoisoned) {
                 val poisonDamage = (randomHero.maxHP * 0.1).toInt()
                 randomHero.takeDamage(poisonDamage)
                 println("${randomHero.name} erleidet $poisonDamage Giftschaden.")
-            } else if (randomHero.hp <= randomHero.maxHp * 0.20 && isPoisoned){
+            } else if (randomHero.hp <= randomHero.maxHp * 0.20 && isPoisoned) {
                 isPoisoned = false
                 println("${randomHero.name} hat 20% seiner Lebenspunkte erreicht. Vergiftung beendet!")
             }
@@ -47,8 +47,6 @@ class Minion(name: String, hp: Int) : Boss(name, hp) {
     fun minionAction(isMinionSummoned: Boolean) {
         if (isMinionSummoned) {
             val randomNumber = (1..4).random()
-
-            println("$name hat die Zufallszahl $randomNumber erhalten.")
 
             when (randomNumber) {
                 1 -> fireAttack()

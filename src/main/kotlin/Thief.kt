@@ -50,13 +50,20 @@ class Thief(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
         println("2. Hieb")
         println("3. Täuschung")
         println("4. Hinterhältiger Dolchstoß")
-
-        when (readln().toInt()) {
-            1 -> thief.daggerAttack()
-            2 -> thief.slashAttack()
-            3 -> thief.deception()
-            4 -> thief.sneakAttack()
-            else -> println("Ungültige Auswahl. Normale Attacke wird ausgeführt.")
+        try {
+            when (readln().toInt()) {
+                1 -> thief.daggerAttack()
+                2 -> thief.slashAttack()
+                3 -> thief.deception()
+                4 -> thief.sneakAttack()
+                else -> {
+                    println("Ungültige Auswahl. Bitte 1-4 wählen.")
+                    thiefActions()
+                }
+            }
+        } catch (e: NumberFormatException) {
+            println("Bitte eine Zahl zwischen 1-4 wählen.")
+            thiefActions()
         }
     }
 }

@@ -5,8 +5,8 @@ val warrior: Warrior = Warrior("Artus", 200, 200)
 val minion = Minion("Grisu", 150)
 val dragon: Dragon = Dragon("Messoria", 350)
 
-var heroes : MutableList<Hero> = mutableListOf(magician, thief, warrior)
-var bosses : MutableList<Boss> = mutableListOf(dragon)
+var heroes: MutableList<Hero> = mutableListOf(magician, thief, warrior)
+var bosses: MutableList<Boss> = mutableListOf(dragon)
 
 var isMinionSummoned = false
 var isPoisoned = false
@@ -42,7 +42,12 @@ fun main() {
                     println("\n${thief.name} ist am Zug.")
                     thief.thiefActions()
                 }
-                // Füge hier weitere Heldentypen hinzu, falls benötigt
+
+                is Warrior -> {
+                    println("\n${warrior.name} ist am Zug.")
+                    warrior.warriorActions()
+                }
+
             }
             if (bosses.none { it.isAlive })
                 println("\n--- Alle Bosse sind gestorben. Die Helden gewinnen! ---")
