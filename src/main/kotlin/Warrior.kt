@@ -19,7 +19,6 @@ open class Warrior(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
             println("$name lässt sein Schwert in einer Pirouette schwingen und greift damit ${DRAGON.name} an.")
             DRAGON.takeDamage(damage)
         }
-
     }
 
     private fun BattleAxe(damage: Int = 60) {
@@ -54,12 +53,12 @@ open class Warrior(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
                 3 -> WARRIOR.BattleAxe()
                 4 -> WARRIOR.bothHand()
                 else -> {
-                    println("Ungültige Auswahl. Bitte 1-4 wählen.")
+                    println("Ungültige Auswahl. Bitte 1-4 wählen!")
                     warriorActions()
                 }
             }
         } catch (e: NumberFormatException) {
-            println("Bitte eine Zahl zwischen 1-4 wählen.")
+            println("Falsche Auswahl, bitte gültige ZAHL von 1-4 auswählen!")
             warriorActions()
         }
     }

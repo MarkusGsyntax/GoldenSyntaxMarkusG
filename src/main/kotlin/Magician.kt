@@ -61,7 +61,7 @@ class Magician(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
                 }
             }
         } catch (e: NumberFormatException) {
-            println("Falsche Auswahl, bitte gültige Zahl von 1-4 auswählen!")
+            println("Falsche Auswahl, bitte gültige ZAHL von 1-4 auswählen!")
             magicianActions()
         }
     }

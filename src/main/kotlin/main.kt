@@ -3,7 +3,7 @@ val THIEF: Thief = Thief("Parzival", 110, 110)
 val WARRIOR: Warrior = Warrior("Artus", 200, 200)
 
 val MINION = Minion("Grisu", 150)
-val DRAGON: Dragon = Dragon("Messoria", 350)
+val DRAGON: Dragon = Dragon("Messoria", 500)
 
 var heroes: MutableList<Hero> = mutableListOf(MAGICIAN, THIEF, WARRIOR)
 var bosses: MutableList<Boss> = mutableListOf(DRAGON)
@@ -12,6 +12,9 @@ var isMinionSummoned = false
 var isPoisoned = false
 
 fun main() {
+
+    println("Willkommen zu Golden Syntax")
+
     for (rounds in 1..1000) {
         println("\n--- Runde $rounds ---")
         println("Die Helden haben jetzt:")
@@ -31,7 +34,6 @@ fun main() {
             if (!hero.isAlive) {
                 continue
             }
-
             when (hero) {
                 is Magician -> {
                     println("\n${MAGICIAN.name} ist am Zug.")
@@ -47,10 +49,10 @@ fun main() {
                     println("\n${WARRIOR.name} ist am Zug.")
                     WARRIOR.warriorActions()
                 }
-
             }
-            if (bosses.none { it.isAlive })
-                println("\n--- Alle Bosse sind gestorben. Die Helden gewinnen! ---")
+        }
+        if (bosses.none { it.isAlive }) {
+            println("\n--- Alle Bosse sind gestorben. Die Helden gewinnen! ---")
             break
         }
 
@@ -69,4 +71,3 @@ fun main() {
         }
     }
 }
-

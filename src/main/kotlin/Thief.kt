@@ -62,7 +62,7 @@ class Thief(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
                 }
             }
         } catch (e: NumberFormatException) {
-            println("Bitte eine Zahl zwischen 1-4 wählen.")
+            println("Falsche Auswahl, bitte gültige ZAHL von 1-4 auswählen!")
             thiefActions()
         }
     }
