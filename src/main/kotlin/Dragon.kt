@@ -1,36 +1,16 @@
 open class Dragon(name: String, hp: Int) : Boss(name, hp) {
-    var hasSummonedMinion = false
-    override var isAlive = true
+    private var isDragonSummonedMinion = false
 
-    fun dragonActions() {
-        val randomNumber = if (!hasSummonedMinion) {
-            (1..5).random()
-        } else {
-            (2..6).random()
-        }
-
-        println("$name hat die Zufallszahl $randomNumber erhalten.")
-
-        when (randomNumber) {
-            1 -> summonMinion()
-            2 -> fireBreath(heroes)
-            3 -> thunderStrike(heroes)
-            4 -> heal()
-            5 -> shield()
-            6 -> regenerate()
-            else -> println("Keine gültige Aktion für Zufallszahl $randomNumber")
-        }
-    }
-
-    fun summonMinion() {
-        if (!hasSummonedMinion) {
+    private fun summonMinion() {
+        if (!isMinionSummoned) {
             println("$name ruft Unterboss herbei!")
-            hasSummonedMinion = true
+            isMinionSummoned = true
+            isDragonSummonedMinion = true
             bosses.add(minion)
         }
     }
 
-    fun fireBreath(heroes: List<Hero>, damage: Int = 40) {
+    private fun fireBreath(damage: Int = 40) {
         val livingHeroes = heroes.filter { it.isAlive }
         println("$name schickt seinen Feueratem und verursacht an allen lebenden Helden $damage Lebenspunkte Schaden!")
         for (hero in livingHeroes) {
@@ -38,11 +18,11 @@ open class Dragon(name: String, hp: Int) : Boss(name, hp) {
         }
     }
 
-    private fun thunderStrike(heroes: List<Hero>, damage: Int = 40) {
+    private fun thunderStrike(damage: Int = 40) {
         val livingHeroes = heroes.filter { it.isAlive }
-        println("$name ruft einen Blitzschlag herab und trifft einen zufälligen lebenden Helden.")
         if (livingHeroes.isNotEmpty()) {
             val randomHero = livingHeroes.random()
+            println("$name ruft einen Blitzschlag herab und trifft ${randomHero.name}.")
             randomHero.takeDamage(damage)
         }
     }
@@ -54,7 +34,28 @@ open class Dragon(name: String, hp: Int) : Boss(name, hp) {
 
     private fun regenerate() {
         println("$name regeneriert ${minion.name} um 25 Lebenspunkte!")
-        minion.hp + 25
+        minion.hp += 25
+    }
+
+    fun dragonActions() {
+        val randomNumber = if (!isMinionSummoned) {
+            (1..5).random()
+        } else if (!isDragonSummonedMinion && minion.isAlive) {
+            (2..6).random()
+        } else {
+            (2..5).random()
+        }
+
+        when (randomNumber) {
+            1 -> summonMinion()
+            2 -> fireBreath()
+            3 -> thunderStrike()
+            4 -> heal()
+            5 -> shield()
+            6 -> regenerate()
+            else -> println("Keine gültige Aktion für Zufallszahl $randomNumber")
+        }
     }
 }
+
 

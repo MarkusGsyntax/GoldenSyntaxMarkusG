@@ -1,8 +1,8 @@
-class Thief(name: String, hp: Int) : Hero(name, hp) {
+class Thief(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
 
 
-    fun daggerAttack(bosses: List<Boss>, damage: Int = 25) {
-        if (bosses.contains(minion)) {
+    private fun daggerAttack(damage: Int = 25) {
+        if (isMinionSummoned && minion.isAlive) {
             println("$name greift ${minion.name} mit seinem Dolch an.")
             minion.takeDamage(damage)
         } else {
@@ -11,8 +11,8 @@ class Thief(name: String, hp: Int) : Hero(name, hp) {
         }
     }
 
-    fun slashAttack(bosses: List<Boss>, damage: Int = 40) {
-        if (bosses.contains(minion)) {
+    private fun slashAttack(damage: Int = 40) {
+        if (isMinionSummoned && minion.isAlive) {
             println("$name greift mit einem mächtigen Hieb ${minion.name} an.")
             minion.takeDamage(damage)
             println("${minion.name} hat nun noch ${minion.hp} Lebenspunkte übrig!")
@@ -23,8 +23,8 @@ class Thief(name: String, hp: Int) : Hero(name, hp) {
 
     }
 
-    fun decieve (bosses: List<Boss>, damage: Int = 40) {
-        if (bosses.contains(minion)) {
+    private fun deception(damage: Int = 40) {
+        if (isMinionSummoned && minion.isAlive) {
             println("$name täuscht ${minion.name} und stiehlt ihm 40 Lebenspunkte!")
             minion.takeDamage(damage)
             this.hp += 40
@@ -34,29 +34,30 @@ class Thief(name: String, hp: Int) : Hero(name, hp) {
             this.hp += 40
         }
     }
-        fun sneakAttack(bosses: List<Boss>, damage: Int = 60) {
-            if (bosses.contains(minion)) {
-                println("$name schleicht sich leise an ${minion.name} heran und führt einen hinterhältigen Dolchstoß aus.")
-                minion.takeDamage(damage)
-            } else {
-                println("$name schleicht sich leise an ${dragon.name} heran und führt einen hinterhältigen Dolchstoß aus.")
-                dragon.takeDamage(damage)
-            }
-        }
 
-        fun thiefAction() {
-            println("1. Dolchangriff")
-            println("2. Hieb")
-            println("3. Täuschung")
-            println("4. Hinterhältiger Dolchstoß")
-
-            when (readLine()?.toIntOrNull()) {
-                1 -> thief.daggerAttack(bosses)
-                2 -> thief.slashAttack(bosses)
-                3 -> thief.decieve(bosses)
-                4 -> thief.sneakAttack(bosses)
-                else -> println("Ungültige Auswahl. Normale Attacke wird ausgeführt.")
-            }
+    private fun sneakAttack(damage: Int = 60) {
+        if (isMinionSummoned && minion.isAlive) {
+            println("$name schleicht sich leise an ${minion.name} heran und führt einen hinterhältigen Dolchstoß aus.")
+            minion.takeDamage(damage)
+        } else {
+            println("$name schleicht sich leise an ${dragon.name} heran und führt einen hinterhältigen Dolchstoß aus.")
+            dragon.takeDamage(damage)
         }
     }
+
+    fun thiefActions() {
+        println("1. Dolchangriff")
+        println("2. Hieb")
+        println("3. Täuschung")
+        println("4. Hinterhältiger Dolchstoß")
+
+        when (readln().toInt()) {
+            1 -> thief.daggerAttack()
+            2 -> thief.slashAttack()
+            3 -> thief.deception()
+            4 -> thief.sneakAttack()
+            else -> println("Ungültige Auswahl. Normale Attacke wird ausgeführt.")
+        }
+    }
+}
 

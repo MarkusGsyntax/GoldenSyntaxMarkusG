@@ -1,3 +1,3 @@
-open class Warrior(name: String, hp: Int) : Hero(name, hp) {
+open class Warrior(name: String, hp: Int, maxHp : Int) : Hero(name, hp, maxHp) {
 
 }

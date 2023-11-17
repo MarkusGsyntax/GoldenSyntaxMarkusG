@@ -1,49 +1,67 @@
-val magician: Magician = Magician("Merlin", 150)
-val warrior: Warrior = Warrior("Artus", 200)
-val minion = Minion("Grisu", 100)
+val magician: Magician = Magician("Merlin", 150, 150)
+val thief: Thief = Thief("Parzival", 110, 110)
+val warrior: Warrior = Warrior("Artus", 200, 200)
+
+val minion = Minion("Grisu", 150)
 val dragon: Dragon = Dragon("Messoria", 350)
-val thief: Thief = Thief("Parzival", 110)
-var heroes = mutableListOf(magician, thief, warrior)
-var bosses = mutableListOf(dragon)
+
+var heroes : MutableList<Hero> = mutableListOf(magician, thief, warrior)
+var bosses : MutableList<Boss> = mutableListOf(dragon)
+
+var isMinionSummoned = false
+var isPoisoned = false
 
 fun main() {
-    var isMinionSummoned = false
-    val playBosses = ArrayList(bosses)
-    val playHeroes = ArrayList(heroes)
-    while (heroes.any { it.isAlive } && bosses.any { it.isAlive }) {
-        println("\n--- Heldenzug ---")
-
-        if (magician.isAlive) {
-            println("Der Magier ist am Zug")
-            magician.magicianAction()
-        }
-        if (thief.isAlive){
-            println("der Dieb ist am Zug")
-            thief.thiefAction()
+    for (rounds in 1..1000) {
+        println("\n--- Runde $rounds ---")
+        println("Die Helden haben jetzt:")
+        heroes.forEach { hero ->
+            println("${hero.name} -> ${hero.hp} Lebenspunkte")
         }
 
+        println()
+        println()
+
+        println("Die Gegner haben jetzt:")
+        bosses.forEach { boss ->
+            println("${boss.name} -> ${boss.hp} Lebenspunkte")
+        }
+
+        for (hero in heroes) {
+            if (!hero.isAlive) {
+                continue
+            }
+
+            when (hero) {
+                is Magician -> {
+                    println("\n${magician.name} ist am Zug.")
+                    magician.magicianActions()
+                }
+
+                is Thief -> {
+                    println("\n${thief.name} ist am Zug.")
+                    thief.thiefActions()
+                }
+                // Füge hier weitere Heldentypen hinzu, falls benötigt
+            }
+            if (bosses.none { it.isAlive })
+                println("\n--- Alle Bosse sind gestorben. Die Helden gewinnen! ---")
+            break
+        }
 
         println("\n--- Bossezug ---")
 
-        if (minion.isAlive && dragon.isAlive) {
-            for (boss in playBosses) {
-                if (boss.isAlive) {
-                    dragon.dragonActions()
-                    if (!minion.isAlive && !dragon.isAlive) {
-                        break
-                    }
-                }
-            }
-        }
-    }
-    println("\n--- Spiel beendet ---")
+        if (isMinionSummoned && minion.isAlive) {
+            dragon.dragonActions()
+            minion.minionAction(isMinionSummoned)
 
-    if (heroes.all { !it.isAlive }) {
-        println("Die Bosse haben gewonnen!")
-    } else if (bosses.all { !it.isAlive }) {
-        println("Die Helden haben gewonnen!")
-    } else {
-        println("Ungültiges Spielende. Kein klarer Gewinner.")
+        } else {
+            dragon.dragonActions()
+        }
+        if (heroes.none { it.isAlive }) {
+            println("\n--- Alle Helden sind gestorben. Die Bosse gewinnen! ---")
+            break
+        }
     }
 }
 
