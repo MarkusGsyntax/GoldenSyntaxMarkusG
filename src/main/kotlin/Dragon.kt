@@ -6,7 +6,7 @@ open class Dragon(name: String, hp: Int) : Boss(name, hp) {
             println("$name ruft Unterboss herbei!")
             isMinionSummoned = true
             isDragonSummonedMinion = true
-            bosses.add(minion)
+            bosses.add(MINION)
         }
     }
 
@@ -33,14 +33,14 @@ open class Dragon(name: String, hp: Int) : Boss(name, hp) {
     }
 
     private fun regenerate() {
-        println("$name regeneriert ${minion.name} um 25 Lebenspunkte!")
-        minion.hp += 25
+        println("$name regeneriert ${MINION.name} um 25 Lebenspunkte!")
+        MINION.hp += 25
     }
 
     fun dragonActions() {
         val randomNumber = if (!isMinionSummoned) {
             (1..5).random()
-        } else if (!isDragonSummonedMinion && minion.isAlive) {
+        } else if (!isDragonSummonedMinion && MINION.isAlive) {
             (2..6).random()
         } else {
             (2..5).random()

@@ -1,12 +1,12 @@
-val magician: Magician = Magician("Merlin", 150, 150)
-val thief: Thief = Thief("Parzival", 110, 110)
-val warrior: Warrior = Warrior("Artus", 200, 200)
+val MAGICIAN: Magician = Magician("Merlin", 150, 150)
+val THIEF: Thief = Thief("Parzival", 110, 110)
+val WARRIOR: Warrior = Warrior("Artus", 200, 200)
 
-val minion = Minion("Grisu", 150)
-val dragon: Dragon = Dragon("Messoria", 350)
+val MINION = Minion("Grisu", 150)
+val DRAGON: Dragon = Dragon("Messoria", 350)
 
-var heroes: MutableList<Hero> = mutableListOf(magician, thief, warrior)
-var bosses: MutableList<Boss> = mutableListOf(dragon)
+var heroes: MutableList<Hero> = mutableListOf(MAGICIAN, THIEF, WARRIOR)
+var bosses: MutableList<Boss> = mutableListOf(DRAGON)
 
 var isMinionSummoned = false
 var isPoisoned = false
@@ -34,18 +34,18 @@ fun main() {
 
             when (hero) {
                 is Magician -> {
-                    println("\n${magician.name} ist am Zug.")
-                    magician.magicianActions()
+                    println("\n${MAGICIAN.name} ist am Zug.")
+                    MAGICIAN.magicianActions()
                 }
 
                 is Thief -> {
-                    println("\n${thief.name} ist am Zug.")
-                    thief.thiefActions()
+                    println("\n${THIEF.name} ist am Zug.")
+                    THIEF.thiefActions()
                 }
 
                 is Warrior -> {
-                    println("\n${warrior.name} ist am Zug.")
-                    warrior.warriorActions()
+                    println("\n${WARRIOR.name} ist am Zug.")
+                    WARRIOR.warriorActions()
                 }
 
             }
@@ -56,12 +56,12 @@ fun main() {
 
         println("\n--- Bossezug ---")
 
-        if (isMinionSummoned && minion.isAlive) {
-            dragon.dragonActions()
-            minion.minionAction(isMinionSummoned)
+        if (isMinionSummoned && MINION.isAlive) {
+            DRAGON.dragonActions()
+            MINION.minionAction(isMinionSummoned)
 
         } else {
-            dragon.dragonActions()
+            DRAGON.dragonActions()
         }
         if (heroes.none { it.isAlive }) {
             println("\n--- Alle Helden sind gestorben. Die Bosse gewinnen! ---")

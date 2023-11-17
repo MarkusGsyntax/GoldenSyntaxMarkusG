@@ -2,46 +2,46 @@ class Thief(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
 
 
     private fun daggerAttack(damage: Int = 25) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name greift ${minion.name} mit seinem Dolch an.")
-            minion.takeDamage(damage)
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name greift ${MINION.name} mit seinem Dolch an.")
+            MINION.takeDamage(damage)
         } else {
-            println("$name greift ${dragon.name} mit seinem Dolch an.")
-            dragon.takeDamage(damage)
+            println("$name greift ${DRAGON.name} mit seinem Dolch an.")
+            DRAGON.takeDamage(damage)
         }
     }
 
     private fun slashAttack(damage: Int = 40) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name greift mit einem mächtigen Hieb ${minion.name} an.")
-            minion.takeDamage(damage)
-            println("${minion.name} hat nun noch ${minion.hp} Lebenspunkte übrig!")
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name greift mit einem mächtigen Hieb ${MINION.name} an.")
+            MINION.takeDamage(damage)
+            println("${MINION.name} hat nun noch ${MINION.hp} Lebenspunkte übrig!")
         } else {
-            println("$name greift mit einem mächtigen Hieb ${dragon.name} an.")
-            dragon.takeDamage(damage)
+            println("$name greift mit einem mächtigen Hieb ${DRAGON.name} an.")
+            DRAGON.takeDamage(damage)
         }
 
     }
 
     private fun deception(damage: Int = 40) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name täuscht ${minion.name} und stiehlt ihm 40 Lebenspunkte!")
-            minion.takeDamage(damage)
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name täuscht ${MINION.name} und stiehlt ihm 40 Lebenspunkte!")
+            MINION.takeDamage(damage)
             this.hp += 40
         } else {
-            println("$name täuscht ${dragon.name} und stiehlt ihm 40 Lebenspunkte!")
-            dragon.takeDamage(damage)
+            println("$name täuscht ${DRAGON.name} und stiehlt ihm 40 Lebenspunkte!")
+            DRAGON.takeDamage(damage)
             this.hp += 40
         }
     }
 
     private fun sneakAttack(damage: Int = 60) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name schleicht sich leise an ${minion.name} heran und führt einen hinterhältigen Dolchstoß aus.")
-            minion.takeDamage(damage)
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name schleicht sich leise an ${MINION.name} heran und führt einen hinterhältigen Dolchstoß aus.")
+            MINION.takeDamage(damage)
         } else {
-            println("$name schleicht sich leise an ${dragon.name} heran und führt einen hinterhältigen Dolchstoß aus.")
-            dragon.takeDamage(damage)
+            println("$name schleicht sich leise an ${DRAGON.name} heran und führt einen hinterhältigen Dolchstoß aus.")
+            DRAGON.takeDamage(damage)
         }
     }
 
@@ -52,10 +52,10 @@ class Thief(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
         println("4. Hinterhältiger Dolchstoß")
         try {
             when (readln().toInt()) {
-                1 -> thief.daggerAttack()
-                2 -> thief.slashAttack()
-                3 -> thief.deception()
-                4 -> thief.sneakAttack()
+                1 -> THIEF.daggerAttack()
+                2 -> THIEF.slashAttack()
+                3 -> THIEF.deception()
+                4 -> THIEF.sneakAttack()
                 else -> {
                     println("Ungültige Auswahl. Bitte 1-4 wählen.")
                     thiefActions()

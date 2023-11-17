@@ -26,7 +26,6 @@ class Minion(name: String, hp: Int) : Boss(name, hp) {
         }
     }
 
-
     private fun lifeSteal(damage: Int = 25) {
         val livingHeroes = heroes.filter { it.isAlive }
         if (livingHeroes.isNotEmpty()) {

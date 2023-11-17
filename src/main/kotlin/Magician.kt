@@ -3,12 +3,12 @@ class Magician(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
     var shieldRound = 0
 
     private fun fireball(damage: Int = 25) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name wirft einen Feuerball auf ${minion.name} und fügt ihm $damage Lebenspunkte Schaden zu!")
-            minion.takeDamage(damage)
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name wirft einen Feuerball auf ${MINION.name} und fügt ihm $damage Lebenspunkte Schaden zu!")
+            MINION.takeDamage(damage)
         } else {
-            println("$name wirft einen Feuerball auf ${dragon.name} und fügt ihm $damage Lebenspunkte Schaden zu!")
-            dragon.takeDamage(damage)
+            println("$name wirft einen Feuerball auf ${DRAGON.name} und fügt ihm $damage Lebenspunkte Schaden zu!")
+            DRAGON.takeDamage(damage)
         }
     }
 
@@ -32,13 +32,13 @@ class Magician(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
     }
 
     private fun firestorm(damage: Int = 25) {
-        if (isMinionSummoned && minion.isAlive) {
-            println("$name entfacht einen Feuersturm und fügt ${dragon.name} und ${minion.name} $damage Lebenspunkte Schaden zu!")
-            dragon.takeDamage(damage)
-            minion.takeDamage(damage)
+        if (isMinionSummoned && MINION.isAlive) {
+            println("$name entfacht einen Feuersturm und fügt ${DRAGON.name} und ${MINION.name} $damage Lebenspunkte Schaden zu!")
+            DRAGON.takeDamage(damage)
+            MINION.takeDamage(damage)
         } else {
-            println("$name entfacht einen Feuersturm und fügt ${dragon.name} $damage Lebenspunkte Schaden zu!")
-            dragon.takeDamage(damage)
+            println("$name entfacht einen Feuersturm und fügt ${DRAGON.name} $damage Lebenspunkte Schaden zu!")
+            DRAGON.takeDamage(damage)
         }
     }
 
@@ -51,10 +51,10 @@ class Magician(name: String, hp: Int, maxHp: Int) : Hero(name, hp, maxHp) {
         try {
             when (readln().toInt()) {
 
-                1 -> magician.fireball()
-                2 -> magician.firestorm()
-                3 -> magician.healAllHeroes(heroes)
-                4 -> magician.protectHeroes(heroes)
+                1 -> MAGICIAN.fireball()
+                2 -> MAGICIAN.firestorm()
+                3 -> MAGICIAN.healAllHeroes(heroes)
+                4 -> MAGICIAN.protectHeroes(heroes)
                 else -> {
                     println("Ungültige Auswahl, bitte 1-4 auswählen!")
                     magicianActions()
